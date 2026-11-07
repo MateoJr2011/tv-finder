@@ -12,9 +12,36 @@ async function loadShows() {
 
     const shows = await res.json();
     console.log(shows);
+    const sorted = [...shows].sort((a,b) => {
+        const ratingA = a.rating?.average ?? 0
+        const ratingB = b.rating?.average ?? 0 
+        return ratingB - ratingA
+    })
+
+
+    const top25 = sorted.slice(0, 25)
+
+    fillDropdown(top25)
   } catch (error) {
     console.error(error);
   }
 }
 
 loadShows();
+
+function fillDropdown(shows) {
+    showSelect.innerHTML = ""
+
+    const placeholder = document.createElement("option")
+    placeholder.textContent = "Select a show"
+    placeholder.value = ""
+    showSelect.appendChild(placeholder)
+
+    for (const show of shows) {
+        const option = document.createElement("option")
+        option.textContent = show.name
+        option.value = show.id
+        showSelect.appendChild(option)
+    }
+
+}
