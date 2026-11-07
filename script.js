@@ -1,4 +1,5 @@
 const showSelect = document.getElementById("show-select");
+const showDetails = document.getElementById("show- deatils")
 
 async function loadShows() {
   const url = "https://api.tvmaze.com/shows?page=0";
@@ -26,6 +27,32 @@ async function loadShows() {
     console.error(error);
   }
 }
+async function loadShowDetails(id) {
+  const url = `https://api.tvmaze.com/shows/${id}`;
+
+  try {
+    const res = await fetch(url);
+
+    if (!res.ok) {
+      throw new Error(`Request failed with status ${res.status}`);
+    }
+
+    const show = await res.json();
+    console.log(show);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+showSelect.addEventListener("change", function () {
+  const id = showSelect.value;
+
+  if (id === "") {
+    return;
+  }
+
+  loadShowDetails(id);
+});
 
 loadShows();
 
