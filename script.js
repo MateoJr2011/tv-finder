@@ -1,8 +1,21 @@
 const showSelect = document.getElementById("show-select");
 const showDetails = document.getElementById("show-details")
+const listStatus = document.getElementById("list-status");
+const detailsStatus = document.getElementById("details-status");
+
+function showMessage(element, text) {
+    element.textContent = text;
+}
+
+function clearMessage(element) {
+    element.textContent = "";
+}
+
 
 async function loadShows() {
     const url = "https://api.tvmaze.com/shows?page=0";
+    clearMessage(listStatus)
+    showMessage(listStatus, "Loading shows...")
 
     try {
         const res = await fetch(url);
@@ -12,7 +25,7 @@ async function loadShows() {
         }
 
         const shows = await res.json();
-        console.log(shows);
+        
         const sorted = [...shows].sort((a, b) => {
             const ratingA = a.rating?.average ?? 0
             const ratingB = b.rating?.average ?? 0
@@ -21,19 +34,26 @@ async function loadShows() {
 
 
         const top25 = sorted.slice(0, 25)
+        clearMessage(listStatus)
 
         fillDropdown(top25)
     } catch (error) {
         console.error(error);
+        showMessage(listStatus, "something went wrong while loading the shows. Please try again")
     }
 }
 loadShows();
 async function loadShowDetails(id) {
     const url = `https://api.tvmaze.com/shows/${id}`;
-
+     
+    clearMessage(detailsStatus)
+    showMessage(detailsStatus, "Loading show...")
     try {
         const res = await fetch(url);
-
+        if (res.status === 404) {
+            showMessage(detailsStatus, "That show could not be found.")
+            return
+        }
         if (!res.ok) {
             throw new Error(`Request failed with status ${res.status}`);
         }
@@ -41,8 +61,10 @@ async function loadShowDetails(id) {
         const show = await res.json();
         
         displayDetails(show)
+        clearMessage(detailsStatus)
     } catch (error) {
         console.error(error);
+        showMessage(detailsStatus, "Something went wrong while loading this show. Please try again.")
     }
 }
 
