@@ -1,0 +1,147 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+}
+
+body {
+    font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    background: linear-gradient(165deg, #eaf4ff 0%, #ddeeff 50%, #fff8dc 100%);
+    color: #10243e;
+    line-height: 1.6;
+    padding: 2rem 1.25rem 3rem;
+    background-attachment: fixed;
+}
+
+body > h1,
+body > label,
+body > select,
+body > p,
+body > div {
+    max-width: 680px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+h1 {
+    color: #1263c4;
+    font-size: 2rem;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+label {
+    display: block;
+    font-weight: 600;
+    color: #10243e;
+    margin-bottom: 0.4rem;
+}
+
+#show-select {
+    display: block;
+    width: 100%;
+    max-width: 680px;
+    margin: 0 auto 1rem;
+    padding: 0.7rem 0.9rem;
+    font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    font-size: 1rem;
+    color: #10243e;
+    background-color: #ffffff;
+    border: 2px solid #9cc3f0;
+    border-radius: 14px;
+    cursor: pointer;
+
+    background-position: calc(100% - 20px) 55%, calc(100% - 14px) 55%;
+    background-size: 6px 6px, 6px 6px;
+    background-repeat: no-repeat;
+    box-shadow: 0 3px 10px rgba(18, 99, 196, 0.12);
+}
+
+#show-select:focus {
+    outline: 3px solid #0698d1;
+    outline-offset: 1px;
+}
+
+.status {
+    font-size: 0.95rem;
+    color: #4a5c74;
+    margin-bottom: 1rem;
+}
+
+.status.loading:not(:empty) {
+    color: #0b7a5c;
+    font-style: italic;
+    font-weight: 600;
+}
+
+.status.error:not(:empty) {
+    color: #b3341e;
+    background: #ffe9df;
+    border-left: 4px solid #e8543a;
+    padding: 0.6rem 0.8rem;
+    border-radius: 6px;
+    margin-bottom: 1rem;
+}
+
+#show-details {
+    background: #ffffff;
+    border: 2px solid #cfe3fb;
+    border-radius: 18px;
+    box-shadow: 0 8px 24px rgba(18, 99, 196, 0.14);
+    padding: 1.5rem;
+}
+
+#show-details:empty {
+    display: none;
+}
+
+#show-details h2 {
+    color: #1263c4;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+#show-details img {
+    display: block;
+    max-width: 220px;
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 1.25rem;
+    box-shadow: 0 4px 12px rgba(16, 36, 62, 0.18);
+}
+
+#show-details div {
+    margin-bottom: 1.25rem;
+    line-height: 1.7;
+}
+
+#show-details div p {
+    margin: 0.5rem 0;
+}
+
+#show-details > p {
+    margin: 0.45rem 0;
+    padding: 0.45rem 0.8rem;
+    background: #d1dfff;
+    border-radius: 8px;
+    font-size: 0.95rem;
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 1.25rem 1rem 2rem;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    #show-details {
+        padding: 1rem;
+    }
+
+    #show-details img {
+        max-width: 100%;
+    }
+}
